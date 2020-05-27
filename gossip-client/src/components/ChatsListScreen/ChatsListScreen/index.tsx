@@ -13,4 +13,4 @@ const ChatsListScreen: React.FC = () => (
     </Container>
 );
 
-export default ChatsListScreen
+export default ChatsListScreen;
