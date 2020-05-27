@@ -1,8 +1,9 @@
 import React from 'react';
-import {useState, useMemo} from 'react';
+import {useCallback, useState, useMemo} from 'react';
 import moment from 'moment';
 import {List, ListItem, Container} from '@material-ui/core'
 import styled from 'styled-components'
+import { History } from 'history';
 
 const container = styled.div`
     height: calc(100% - 56px);
@@ -70,7 +71,13 @@ const getChatsqQuery = `
     }
   }
 `;
-const ChatsList = () => {
+interface ChatsListProps {
+  history: History,
+}
+
+const ChatsList: React.FC<ChatsListProps> = ({ history }) => {
+
+
   const [chats, setChats] = useState<any[]>([]);
  
   useMemo(async () => {
@@ -89,18 +96,19 @@ const ChatsList = () => {
     setChats(chats);
   }, []);
 
+  const navToChat = useCallback((chat) => {history.push(`chats/${chat.id}`)},[history]);
   return (
     <Container>
       <StyledList>
         {chats.map((chat) => (
-          <StyledListItem key={chat!.id} button>
-            <ChatPicture src={chat.picture} alt="Profile" />
+          <StyledListItem key={chat!.id} button onClick = {navToChat.bind(null,chat)}>
+            <ChatPicture data-testid="picture" src={chat.picture} alt="Profile" />
             <ChatInfo>
               <ChatName>{chat.name}</ChatName>
               {chat.lastMessage && (
                 <React.Fragment>
-                  <MessageContent>{chat.lastMessage.content}</MessageContent>
-                  <MessageDate>
+                  <MessageContent data-testid="content">{chat.lastMessage.content}</MessageContent>
+                  <MessageDate data-testid="date">
                     {moment(chat.lastMessage.createdAt).format('HH:mm')}
                   </MessageDate>
                 </React.Fragment>
