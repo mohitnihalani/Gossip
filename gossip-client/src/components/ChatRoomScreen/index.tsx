@@ -20,11 +20,11 @@ interface ChatRoomScreenParams {
     chatId: string;
   }
    
-  interface ChatQueryMessage {
+interface ChatQueryMessage {
     id: string;
     content: string;
     createdAt: Date;
-  }
+}
    
   interface ChatQueryResult {
     id: string;

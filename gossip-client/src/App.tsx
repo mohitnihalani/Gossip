@@ -5,6 +5,7 @@ import {
   Redirect,
   RouteComponentProps,
 } from 'react-router-dom';
+
 import ChatRoomScreen from "./components/ChatRoomScreen";
 import ChatsListScreen from './components/ChatsListScreen/ChatsListScreen'
 import AnimatedSwitch from './components/AnimatedSwitch';
