@@ -1,6 +1,8 @@
 import moment from 'moment';
 import React from 'react';
 import styled from 'styled-components';
+import { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import { ChatQueryMessage } from './index';
 
 const Container = styled.div`
@@ -65,16 +67,22 @@ interface MessageListProps {
 }
 
 const MessagesList: React.FC<MessageListProps> = ({messages}) => {
+    const selfRef = useRef(null);
+
+    useEffect(() => {
+        if(!selfRef.current) return;
+        const selfDOMNode = ReactDOM.findDOMNode(selfRef.current) as HTMLElement;
+        selfDOMNode.scrollTop = Number.MAX_SAFE_INTEGER;
+    },[messages.length]);
 
     return (
-        <Container>
-            {messages && messages.map((message: any) => (
-                <MessageItem>
-                    <Contents> {message.content} </Contents>
-                    <Timestamp> {moment(message.createdAt).format('HH:mm')} </Timestamp>
+        <Container ref={selfRef}>
+            {messages.map((message: any) => (
+                <MessageItem key={message.id} data-testid="message-item">
+                    <Contents data-testid="message-content">{message.content}</Contents>
+                    <Timestamp data-testid="message-date">{moment(message.createdAt).format('HH:mm')}</Timestamp>
                 </MessageItem>
             ))}
-
         </Container>
     );
 
