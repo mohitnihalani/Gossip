@@ -1,13 +1,13 @@
 import React from 'react';
 import {useCallback, useState, useMemo} from 'react';
 import moment from 'moment';
-import {List, ListItem, Container} from '@material-ui/core'
+import {List, ListItem} from '@material-ui/core'
 import styled from 'styled-components'
 import { History } from 'history';
 
-const container = styled.div`
-    height: calc(100% - 56px);
-    overflow-y: overlay;
+const Container = styled.div`
+  height: calc(100% - 56px);
+  overflow-y: overlay;
 `;
 
 const StyledList = styled(List)`

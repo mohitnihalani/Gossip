@@ -17,8 +17,8 @@ const App: React.FC = () => (
       <Route
           exact
           path="/chats/:chatId"
-          component={({ match }: RouteComponentProps<{ chatId: string }>) => (
-              <ChatRoomScreen chatId={match.params.chatId} />
+          component={({ match,history }: RouteComponentProps<{ chatId: string }>) => (
+              <ChatRoomScreen chatId={match.params.chatId} history={history} />
             )
           }
         />
