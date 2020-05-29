@@ -49,4 +49,6 @@ To not got bored and loose motivation of the project I have set some milestones 
 - [] Authentication
 - [] Adding and Removing chats
 - [] Will add more, once these completed.
+- [] Host website on server
+- [] Keep Updating once new technologies come
 
