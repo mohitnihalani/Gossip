@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from './client';
 import * as serviceWorker from "./serviceWorker";
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
@@ -14,7 +16,9 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <React.StrictMode>
     <MuiThemeProvider theme={theme}>
-      <App />
+      <ApolloProvider client = {client}>
+        <App />
+      </ApolloProvider>
     </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

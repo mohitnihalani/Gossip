@@ -45,7 +45,7 @@ interface MessageProps {
 }
 const MessageInput: React.FC<MessageProps> = ({onSendMessage}) => {
     const [message, setMessage] = useState(' ');
-
+    console.log("Message Input");
     const onKeyPress = (e: any) => {
       if (e.charCode === 13) {
         submitMessage();
