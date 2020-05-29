@@ -82,14 +82,15 @@ const ChatsList: React.FC<ChatsListProps> = ({ history }) => {
 
   const { data } = useQuery<any>(getChatsQuery);
 
- 
-  if(data == undefined || data.chats == undefined) {
+  const navToChat = useCallback((chat) => {history.push(`chats/${chat.id}`)},[history]);
+  if(data === undefined || data.chats === undefined) {
     return null;
   }
 
   let chats = data.chats;
 
-  const navToChat = useCallback((chat) => {history.push(`chats/${chat.id}`)},[history]);
+  
+
   return (
     <Container>
       <StyledList>
