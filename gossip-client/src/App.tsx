@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import ChatRoomScreen from "./components/ChatRoomScreen";
-import ChatsListScreen from './components/ChatsListScreen/ChatsListScreen'
+import ChatsListScreen from './components/ChatsListScreen'
 import AnimatedSwitch from './components/AnimatedSwitch';
 
 const App: React.FC = () => (

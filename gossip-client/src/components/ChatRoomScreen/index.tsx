@@ -84,15 +84,42 @@ const ChatRoomScreen: React.FC<ChatRoomScreenParams> = ({chatId,history}) => {
       },
       update: (client, { data }) => {
         if (data && data.addMessage) {
-          client.writeQuery({
-            query: getChatQuery,
-            variables: { chatId },
-            data: {
-              chat: {
-                ...chat,
-                messages: chat.messages.concat(data.addMessage),
-              },
-            },
+
+          type FullChat = {[key: string]: any};
+          let fullChat;
+
+          const chatIdFromStore = defaultDataIdFromObject(chat);
+
+          if (chatIdFromStore === null) {
+            return;
+          }
+
+          try {
+            fullChat = client.readFragment<FullChat>({
+              id: chatIdFromStore,
+              fragment: fragments.fullChat,
+              fragmentName: 'FullChat',
+            });
+          } catch (e){
+            return;
+          }
+
+          if(fullChat === null || fullChat.messages === null || data === null || data.addMessage === null ||  data.addMessage.id === null){
+            return;
+          }
+
+          if (fullChat.messages.some((currentMessage: any) => currentMessage.id === data.addMessage.id)){
+            return;
+          }
+
+          fullChat.messages.push(data.addMessage);
+          fullChat.lastMessage = data.addMessage;
+
+          client.writeFragment({
+            id: chatIdFromStore,
+            fragment: fragments.fullChat,
+            fragmentName: 'FullChat',
+            data: fullChat,
           });
         }
 
